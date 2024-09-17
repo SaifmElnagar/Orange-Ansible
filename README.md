@@ -1,7 +1,7 @@
 
 ---
 
-# Ansible Inventory Configurations
+# Lab-1
 
 ## 1. Establishing Local Connection Instead of SSH
 In Ansible, to establish a local connection rather than using SSH, you can use the following inventory parameters:
@@ -136,5 +136,5 @@ windows_host ansible_host=server4.company.com ansible_connection=winrm ansible_u
    dallas_nodes
    ```
 
-This inventory setup provides a clear structure for groups and servers while maintaining organized and readable configurations.
+# Lab-2
 
