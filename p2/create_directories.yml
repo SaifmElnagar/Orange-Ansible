@@ -1,0 +1,28 @@
+---
+- name: Create directory structure and manage files on localhost (Ubuntu)
+  hosts: localhost
+  become: yes  # Use sudo to change permissions/ownership
+  vars:
+    user: saif  # Define your username explicitly
+  tasks:
+    - name: Create the directory structure
+      file:
+        path: "/home/{{ user }}/directories/{{ item }}"
+        state: directory
+        mode: '0755'  # Set directory permissions
+        owner: "{{ user }}"  # Set the directory owner to the defined user
+        group: "{{ user }}"  # Set the directory group to the defined user
+      with_items:
+        - dir1
+        - dir2
+        - dir3
+
+    - name: Ensure specific files are absent
+      file:
+        path: "/home/{{ user }}/directories/{{ item }}"
+        state: absent
+      with_items:
+        - "/home/{{ user }}/directories/dir1/file1.txt"
+        - "/home/{{ user }}/directories/dir2/file2.txt"
+        - "/home/{{ user }}/directories/dir3/file3.txt"
+

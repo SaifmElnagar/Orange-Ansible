@@ -1,0 +1,6 @@
+---
+- name: Test Nginx setup role
+  hosts: local
+  become: yes
+  roles:
+    - nginx_setup

@@ -1,0 +1,8 @@
+---
+- name: Start httpd service on localhost
+  hosts: local
+  tasks:
+    - name: Ensure apache2 is started (on Ubuntu)
+      service:
+        name: apache2
+        state: started
