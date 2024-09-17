@@ -1,134 +1,143 @@
-# Orange-Ansible
+Here’s a README file format addressing your questions and providing the necessary Ansible inventory configurations:
 
+---
 
-```markdown
-# Ansible Inventory Setup Guide
+# Ansible Inventory Configurations
 
-## 1. Inventory Parameters for Local Connection
+## 1. Establishing Local Connection Instead of SSH
+In Ansible, to establish a local connection rather than using SSH, you can use the following inventory parameters:
+- **ansible_connection=local**: This sets up a connection to the local system rather than using SSH.
 
-To establish a local connection in Ansible, use the following inventory parameters:
-- Set `ansible_connection` to `local` to connect to the local machine without using SSH.
+### Example:
+```ini
+localhost ansible_connection=local
+```
 
-## 2. Windows Server Connection
+## 2. Connecting to a Windows Server
+To connect to a Windows server using Ansible, you must set the `ansible_connection` parameter to **winrm**.
 
-To connect to a Windows server in Ansible, you must set the `ansible_connection` parameter to `winrm`.
+### Example:
+```ini
+[windows]
+windows_host ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Dbp@ss123!
+```
 
-## 3. Updating Inventory File
+---
 
-We have a sample inventory file with the following servers:
-
-```bash
+- We have a sample inventory file called inventory. It has 3 servers listed, add another server called server4.company.com in this file.
+bash
 web1 
 web2
-```
 
-Now, add another server called `server4.company.com` with an alias `db1`:
 
-```bash
+Then added the aliases named web1, web2 and web3 for the first three hosts respectively. Update this inventory file to add an alias called db1 for server4.company.com host.
+
+bash
 web1 ansible_host=server1.company.com
 web2 ansible_host=server2.company.com
-web3 ansible_host=server3.company.com
-db1  ansible_host=server4.company.com
-```
-
-## 4. Inventory File with Details from the Table
-
-The web servers are Linux-based, and the DB server is a Windows machine. Below is the updated inventory file with connection details:
-
-```bash
-# Web Servers
-web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
-web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
-web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
-
-# Database Servers
-db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Dbp@ss123!
-```
-
-## 5. Adding Group for Web Servers and DB Servers
-
-We have added a group called `web_servers` for the web servers. Similarly, add a group called `db_servers` for the database servers:
-
-```bash
-# Web Servers
-web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
-web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
-web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
-
-# Database Servers
-db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Dbp@ss123!
-
-[web_servers]
-web1
-web2
-web3
-
-[db_servers]
-db1
-```
-
-## 6. Creating a Parent Group for All Servers
-
-Now, create a group of groups called `all_servers`, and add the previously created groups `web_servers` and `db_servers` under it:
-
-```bash
-# Web Servers
-web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
-web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
-web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
-
-# Database Servers
-db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Dbp@ss123!
-
-[web_servers]
-web1
-web2
-web3
-
-[db_servers]
-db1
-
-[all_servers:children]
-web_servers
-db_servers
-```
-
-## 7. Inventory File Based on New Table Data
-
-Using the details given in the table, update the inventory file as follows:
-
-```bash
-# DB Nodes
-sql_db1 ansible_host=sql01.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
-sql_db2 ansible_host=sql02.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
-
-# Web Nodes
-web_node1 ansible_host=web01.xyz.com ansible_connection=winrm ansible_user=administrator ansible_password=Win$Pass
-web_node2 ansible_host=web02.xyz.com ansible_connection=winrm ansible_user=administrator ansible_password=Win$Pass
-web_node3 ansible_host=web03.xyz.com ansible_connection=winrm ansible_user=administrator ansible_password=Win$Pass
-
-[db_nodes]
-sql_db1
-sql_db2
-
-[web_nodes]
-web_node1
-web_node2
-web_node3
-
-[boston_nodes]
-sql_db1
-web_node1
-
-[dallas_nodes]
-sql_db2
-web_node2
-web_node3
-
-[us_nodes:children]
-boston_nodes
-dallas_nodes
-```
 
 
-```
+- As per the details given in the table below, you can see that, the web servers are linux based hosts and the db server is a Windows machine.
+
+	Update the inventory to add a similar entry for server4.company.com host. Find the required details from the table below.
+
+		---------------------------------------------------------------------------
+		|  Alias |        HOST         | Connection | User          | Password     | 
+		---------------------------------------------------------------------------
+		|  web1  | server1.company.com |    ssh     | root          | Password123! |
+		---------------------------------------------------------------------------
+		|  web2  | server2.company.com |    ssh     | root          | Password123! |
+		---------------------------------------------------------------------------
+		|  web3  | server3.company.com |    ssh     | root          | Password123! |
+		---------------------------------------------------------------------------
+		|  db1   | server4.company.com |    winrm   | administrator | Dbp@ss123!   |
+		---------------------------------------------------------------------------
+
+
+
+
+
+- We have inventory file and added a group called web_servers for web servers. Similarly, add a group called db_servers for database servers.
+
+	
+bash
+	# Sample Inventory File
+
+	# Web Servers
+	web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+	web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+	web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+
+	# Database Servers
+	db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!
+
+
+	[web_servers]
+	web1
+	web2
+	web3
+
+
+
+
+
+
+- Let us now create a group of groups. Create a new group called all_servers and add the previously created groups web_servers and db_servers under it.
+	hint: search for parent group and children
+		
+bash
+		# Sample Inventory File
+
+		# Web Servers
+		web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+		web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+		web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+
+		# Database Servers
+		db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!
+
+
+		[web_servers]
+		web1
+		web2
+		web3
+
+		[db_servers]
+		db1
+
+
+
+
+
+- Update the inventory file to represent the data given in the below table in Ansible Inventory format.
+
+
+		-------------------------------------------------------------------
+		| Server Alias |  Server Name  |  OS    |     User      | Password |
+		-------------------------------------------------------------------
+		| sql_db1      | sql01.xyz.com | Linux  |     root      | Lin$Pass |
+		-------------------------------------------------------------------
+		| sql_db2      | sql02.xyz.com | Linux  |     root      | Lin$Pass |
+		-------------------------------------------------------------------
+		| web_node1    | web01.xyz.com | Win    | administrator | Win$Pass |
+		-------------------------------------------------------------------
+		| web_node2    | web02.xyz.com | Win    | administrator | Win$Pass |
+		-------------------------------------------------------------------
+		| web_node3    | web03.xyz.com | Win    | administrator | Win$Pass |
+		-------------------------------------------------------------------
+
+	 Group the servers together based on this table
+
+		--------------------------------------------------------
+		|    Group         |  Members                          |
+		--------------------------------------------------------
+		|    db_nodes      |  sql_db1, sql_db2                 |
+		--------------------------------------------------------
+		|   web_nodes      |  web_node1, web_node2, web_node3  |
+		--------------------------------------------------------
+		|    boston_nodes  |  sql_db1, web_node1               |
+		--------------------------------------------------------
+		|    dallas_nodes  |  sql_db2, web_node2, web_node3    |
+		--------------------------------------------------------
+		|   us_nodes       |  boston_nodes, dallas_nodes       |
+		--------------------------------------------------------
