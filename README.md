@@ -286,20 +286,32 @@ This playbook installs Nginx on a group of servers, starts the service, and ensu
 - **Write the playbook to add a task to start httpd service on all nodes defined in the inventory file.**
   - Hint: Use the service module.
 
+![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p1/Pasted%20image.png)
+
 - **Create a playbook that uses the file module to create a directory structure on multiple hosts.** 
   - Ensure the directories have specific permissions, ownership, and that certain files are absent in these directories.
+ 
+![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p2/Pasted%20image.png)
 
 - **Use the lineinfile module to ensure that a specific line exists in a configuration file on all hosts.** 
   - For example, add a line to `/etc/hosts` only if it’s not already there.
+ 
+![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p3/Pasted%20image.png)
 
 - **Write a playbook that uses the docker_container module to start a container with a specific image (e.g., nginx).**
   - Ensure the container is always running.
+ 
+![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p4/Pasted%20image.png)
 
 - **Create a role named nginx_setup that installs and configures Nginx on any system.**
   - The role should ensure that the `nginx.conf` file is properly set up, the service is running, and the firewall allows traffic on port 80.
+ 
+![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p1/Pasted%20image.png)
 
 - **Create a role that configures a basic LAMP stack (Linux, Apache, MySQL, PHP).**
   - Ensure each service is installed and properly configured. For example, MySQL should have a database and user created, and Apache should serve a test PHP file.
+ 
+![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p1/Pasted%20image.png)
 
 - **Given the following sample Ansible playbook, write a handler that will correctly restart the web server when the configuration file is changed.**
   ```yaml
@@ -311,6 +323,8 @@ This playbook installs Nginx on a group of servers, starts the service, and ensu
           src: /path/to/webserver.conf
           dest: /etc/webserver/webserver.conf
         notify: Restart web server
+
+![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p1/Pasted%20image.png)
 
 
 
