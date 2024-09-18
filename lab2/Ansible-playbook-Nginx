@@ -1,0 +1,26 @@
+
+## Ansible Playbook for Installing Nginx
+
+This playbook installs Nginx on a group of servers, starts the service, and ensures it is enabled at boot.
+
+```yaml
+---
+- name: Install and configure Nginx
+  hosts: your_group_name
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: started
+
+    - name: Ensure Nginx is enabled at boot
+      service:
+        name: nginx
+        enabled: yes
