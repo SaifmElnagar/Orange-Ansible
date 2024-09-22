@@ -1,0 +1,16 @@
+---
+- name: Update web server configuration
+  hosts: localhost
+  become: yes  # Use sudo to perform tasks that require elevated privileges
+  tasks:
+    - name: Copy web server configuration file
+      copy:
+        src: /path/to/webserver.conf  # Replace with your actual source file path
+        dest: /etc/webserver/webserver.conf  # Replace with your actual destination path
+      notify: Restart web server
+
+  handlers:
+    - name: Restart web server
+      service:
+        name: apache2  # Replace with your web server service name, e.g., nginx, httpd, etc.
+        state: restarted
