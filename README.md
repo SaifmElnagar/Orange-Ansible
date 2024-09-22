@@ -311,7 +311,7 @@ This playbook installs Nginx on a group of servers, starts the service, and ensu
 - **Create a role that configures a basic LAMP stack (Linux, Apache, MySQL, PHP).**
   - Ensure each service is installed and properly configured. For example, MySQL should have a database and user created, and Apache should serve a test PHP file.
  
-![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p1/Pasted%20image.png)
+![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p6/Pasted%20image.png)
 
 - **Given the following sample Ansible playbook, write a handler that will correctly restart the web server when the configuration file is changed.**
   ```yaml
@@ -324,7 +324,7 @@ This playbook installs Nginx on a group of servers, starts the service, and ensu
           dest: /etc/webserver/webserver.conf
         notify: Restart web server
 
-![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p1/Pasted%20image.png)
+![Output](https://github.com/SaifmElnagar/Orange-Ansible/blob/main/p7/Pasted%20image.png)
 
 
 
